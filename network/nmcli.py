@@ -103,6 +103,11 @@ options:
         description:
             - The connection MTU, e.g. 9000. This can't be applied when creating the interface and is done once the interface has been created.
             - Can be used when modifying Team, VLAN, Ethernet (Future plans to implement wifi, pppoe, infiniband)
+    dhcp_client_id:
+        required: False
+        default: None
+        description:
+            - DHCP Client Identifier sent to the DHCP server
     primary:
         required: False
         default: None
@@ -442,6 +447,7 @@ class Nmcli(object):
         self.type=module.params['type']
         self.ip4=module.params['ip4']
         self.gw4=module.params['gw4']
+        self.dhcp_client_id=module.params['dhcp_client_id']
         self.dns4=module.params['dns4']
         self.ip6=module.params['ip6']
         self.gw6=module.params['gw6']
@@ -594,6 +600,9 @@ class Nmcli(object):
         if self.gw4 is not None:
             cmd.append('gw4')
             cmd.append(self.gw4)
+        if self.dhcp_client_id is not None:
+            cmd.append('ipv4.dhcp-client-id')
+            cmd.append(self.dhcp_client_id)
         if self.ip6 is not None:
             cmd.append('ip6')
             cmd.append(self.ip6)
@@ -617,6 +626,9 @@ class Nmcli(object):
         if self.gw4 is not None:
             cmd.append('ipv4.gateway')
             cmd.append(self.gw4)
+        if self.dhcp_client_id is not None:
+            cmd.append('ipv4.dhcp-client-id')
+            cmd.append(self.dhcp_client_id)
         if self.dns4 is not None:
             cmd.append('ipv4.dns')
             cmd.append(self.dns4)
@@ -696,6 +708,9 @@ class Nmcli(object):
         if self.gw4 is not None:
             cmd.append('gw4')
             cmd.append(self.gw4)
+        if self.dhcp_client_id is not None:
+            cmd.append('ipv4.dhcp-client-id')
+            cmd.append(self.dhcp_client_id)
         if self.ip6 is not None:
             cmd.append('ip6')
             cmd.append(self.ip6)
@@ -737,6 +752,9 @@ class Nmcli(object):
         if self.gw4 is not None:
             cmd.append('ipv4.gateway')
             cmd.append(self.gw4)
+        if self.dhcp_client_id is not None:
+            cmd.append('ipv4.dhcp-client-id')
+            cmd.append(self.dhcp_client_id)
         if self.dns4 is not None:
             cmd.append('ipv4.dns')
             cmd.append(self.dns4)
@@ -812,6 +830,9 @@ class Nmcli(object):
         if self.gw4 is not None:
             cmd.append('gw4')
             cmd.append(self.gw4)
+        if self.dhcp_client_id is not None:
+            cmd.append('ipv4.dhcp-client-id')
+            cmd.append(self.dhcp_client_id)
         if self.ip6 is not None:
             cmd.append('ip6')
             cmd.append(self.ip6)
@@ -838,6 +859,9 @@ class Nmcli(object):
         if self.gw4 is not None:
             cmd.append('ipv4.gateway')
             cmd.append(self.gw4)
+        if self.dhcp_client_id is not None:
+            cmd.append('ipv4.dhcp-client-id')
+            cmd.append(self.dhcp_client_id)
         if self.dns4 is not None:
             cmd.append('ipv4.dns')
             cmd.append(self.dns4)
@@ -972,6 +996,7 @@ def main():
             type=dict(required=False, default=None, choices=['ethernet', 'team', 'team-slave', 'bond', 'bond-slave', 'bridge', 'vlan'], type='str'),
             ip4=dict(required=False, default=None, type='str'),
             gw4=dict(required=False, default=None, type='str'),
+            dhcp_client_id=dict(required=False, default=None, type='str'),
             dns4=dict(required=False, default=None, type='str'),
             ip6=dict(required=False, default=None, type='str'),
             gw6=dict(required=False, default=None, type='str'),
