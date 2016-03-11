@@ -108,6 +108,7 @@ options:
         default: None
         description:
             - DHCP Client Identifier sent to the DHCP server
+        version_added: "2.1"
     primary:
         required: False
         default: None
